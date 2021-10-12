@@ -1,0 +1,20 @@
+<ng-container [formGroup]="form">
+  <app-form-input labelText="First Name" labelFor="first-name">
+    <input id="first-name" formControlName="firstName" />
+  </app-form-input>
+  <app-form-input labelText="Last Name" labelFor="last-name">
+    <input id="last-name" formControlName="lastName" />
+  </app-form-input>
+  <app-form-input labelText="Password" labelFor="password">
+    <input id="password" formControlName="password" validateOnBlur />
+  </app-form-input>
+  <app-form-input labelText="Confirm Password" labelFor="confirm-password">
+    <input
+      id="confirm-password"
+      formControlName="confirmPassword"
+      validateOnBlur
+    />
+  </app-form-input>
+  <div>{{ form.status }}</div>
+  <button (click)="trySubmit()">Submit</button>
+</ng-container>

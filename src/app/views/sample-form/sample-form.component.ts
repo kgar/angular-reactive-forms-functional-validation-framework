@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppValidators } from 'src/app/shared/validators';
-import {
-  withCustomMessage,
-  suppressErrorMessage,
-} from 'src/app/shared/validators/hooks';
-import {
-  createGroupValidator,
-  composeValidator,
-} from 'src/app/shared/validators/tools';
+import { withCustomMessage } from 'src/app/shared/validators/hooks';
+import { composeValidator } from 'src/app/shared/validators/tools';
 
 @Component({
   selector: 'app-sample-form',
@@ -19,13 +13,6 @@ export class SampleFormComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    const passwordFields = ['password', 'confirmPassword'];
-
-    const fieldsMustMatchGroupValidator = createGroupValidator(
-      AppValidators.fieldsMustMatch(passwordFields),
-      passwordFields
-    );
-
     this.form = this.fb.group(
       {
         firstName: [null, [AppValidators.required]],
@@ -38,16 +25,7 @@ export class SampleFormComponent implements OnInit {
             ),
           ],
         ],
-        password: [
-          null,
-          [
-            AppValidators.required,
-            composeValidator(
-              fieldsMustMatchGroupValidator.childValidator,
-              suppressErrorMessage
-            ),
-          ],
-        ],
+        password: [null, [AppValidators.required]],
         confirmPassword: [
           null,
           [
@@ -55,11 +33,14 @@ export class SampleFormComponent implements OnInit {
               AppValidators.required,
               withCustomMessage('Please confirm your password')
             ),
-            fieldsMustMatchGroupValidator.childValidator,
           ],
         ],
       },
-      { validators: fieldsMustMatchGroupValidator.parentValidator }
+      {
+        validators: [
+          AppValidators.fieldsMustMatch(['password', 'confirmPassword']),
+        ],
+      }
     );
   }
 

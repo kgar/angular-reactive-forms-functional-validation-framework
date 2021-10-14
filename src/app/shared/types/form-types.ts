@@ -9,9 +9,11 @@ export type AppValidatorFn = {
 };
 
 export type AppValidationErrors = {
-  [key: string]: {
-    message: string;
-    suppressErrorMessages?: boolean;
-    [key: string]: any;
-  };
+  [key: string]:
+    | {
+        message: string;
+        suppressErrorMessages?: boolean;
+        [key: string]: any;
+      }
+    | boolean;
 };

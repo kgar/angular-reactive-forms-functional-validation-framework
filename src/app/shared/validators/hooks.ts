@@ -8,7 +8,7 @@ export const withCustomMessage = (message: string) => (fn: AppValidatorFn) => {
     if (result) {
       for (let key in result) {
         const validation = result[key];
-        validation.message = message;
+        if (typeof validation === 'object') validation.message = message;
       }
     }
 
@@ -38,7 +38,9 @@ export const suppressErrorMessage = (fn: AppValidatorFn) => {
 
     for (let errorKey in result) {
       const error = result[errorKey];
-      error.suppressErrorMessages = true;
+      if (typeof error === 'object') {
+        error.suppressErrorMessages = true;
+      }
     }
 
     return result;

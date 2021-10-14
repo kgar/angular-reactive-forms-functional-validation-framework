@@ -16,13 +16,13 @@ export const getErrorMessage = (
     const key = errorKeys[i];
 
     if (
-      'suppressErrorMessages' in errors[key] &&
-      errors[key].suppressErrorMessages === true
+      typeof errors[key] === 'object' &&
+      errors[key]?.suppressErrorMessages === true
     ) {
       continue;
     }
 
-    if ('message' in errors[key]) {
+    if (typeof errors[key] === 'object') {
       return errors[key].message;
     }
   }

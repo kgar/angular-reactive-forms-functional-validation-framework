@@ -15,6 +15,10 @@
       validateOnBlur
     />
   </app-form-input>
+  <!-- TODO: Be able to limit to a specific validation key by string -->
+  <app-validation-error-message-emitter
+    [control]="form"
+  ></app-validation-error-message-emitter>
   <div>{{ form.status }}</div>
   <button (click)="trySubmit()">Submit</button>
 </ng-container>

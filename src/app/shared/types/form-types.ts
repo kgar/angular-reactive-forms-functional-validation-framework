@@ -8,12 +8,12 @@ export type AppValidatorFn = {
   (control: AbstractControl): AppValidationErrors | null;
 };
 
+type AppValidationError = {
+  message: string;
+  suppressErrorMessages?: boolean;
+  [key: string]: any;
+};
+
 export type AppValidationErrors = {
-  [key: string]:
-    | {
-        message: string;
-        suppressErrorMessages?: boolean;
-        [key: string]: any;
-      }
-    | boolean;
+  [key: string]: AppValidationError | boolean;
 };

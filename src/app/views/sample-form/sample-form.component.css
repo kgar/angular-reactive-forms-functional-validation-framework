@@ -2,6 +2,7 @@
   margin-top: 1rem;
 }
 
-app-form-input {
+app-form-input,
+app-validation-error-message-emitter {
   display: block;
 }
